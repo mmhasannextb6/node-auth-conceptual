@@ -13,6 +13,16 @@ const createuserIntoDb = async(paload:Record<string, unknown>) =>{
     return result
 }
 
-export const userServices = {
-    createuserIntoDb
+
+const getUserFromDb = async() =>{
+    const result =  await pool.query(`SELECT id, name, email, age FROM USERS`)
+    delete result.rows[0].password
+    return result
 }
+
+export const userServices = {
+    createuserIntoDb,
+    getUserFromDb
+}
+
+
